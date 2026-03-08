@@ -1,0 +1,29 @@
+
+{% block content %}
+    <a href= "{% url 'miiapp:post_create' %}" class= "btn btn-primary mb3"> create Publicacion </a href>
+
+    <form action="% url 'miiapp:post_list' %" method = "get">
+        <input type="text" name="search" placeholder="Search..." type = "submit"
+        class = "form-control mb3">
+    </form>
+
+
+    <div class="table-responsive">
+        <table class="table-border">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for post in posts %}
+                <tr>
+                    <td>{{post.title}}</td>
+                    <td>{{post.autor}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
