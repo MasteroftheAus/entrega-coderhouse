@@ -1,0 +1,22 @@
+{% extends 'basetemplate.html'}
+{% block title %}
+Posts
+{% endblock title}
+
+{% block content_title}
+Post Lists
+{% endblock content_title
+
+}
+<ul class="post_lists">
+    {% for post in posts %}
+        <a href="#" class="list-group-item list-group-item-action"> 
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ post.titulo }}</h5>
+                <small>Published the {{ post. publication_date }}</small>
+            </div>
+            <p class="mb-1">{{ post.content }}</p> 
+        </a>
+    {% endfor %}
+
+{% endblock content %}
