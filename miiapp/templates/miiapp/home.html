@@ -1,0 +1,25 @@
+{% extends 'miiapp/base.html' %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome Home!</h1>
+    <a href="{% url 'miiapp:index' %}">Go to Index</a>
+</body>
+
+{% block content %}
+    {% if user.is_authenticated %}
+        Hi {{ user.username }}!
+        <form action="{% url 'miiapp:logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Log Out</button>
+        </form>
+    {% else %}
+        <p>You are not logged in</p>
+        <a href="{% url 'miiapp:login' %}">Log In</a>
+    {% endif %}
+{% endblock %}
+</html>

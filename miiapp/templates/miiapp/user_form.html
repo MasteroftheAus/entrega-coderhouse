@@ -1,0 +1,16 @@
+{% extends 'miiapp/base.html' %}
+
+
+<html>
+<head>
+    <title>Edit your data</title>
+</head>
+<body>
+    <h1>Update User</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save changes</button>
+    </form>
+</body>
+</html>

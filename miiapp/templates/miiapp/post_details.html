@@ -1,0 +1,21 @@
+{% extends 'miiapp/base.html' %}
+
+{% block title %}
+    Post details
+{% endblock title %}
+
+{% block content %}
+    <ul>
+        <li>title: {{object.title}}</li>
+        <li>author: {{object.author}}</li>
+        <li>content: {{object.content}}</li>
+        <li>date of publishing: {{object.fecha_publicacion}}</li>
+        <li>type: {{object.type}}</li>
+        <li>state: {{object.state}}</li>
+    </ul>
+    <div>
+        <a href="{% url 'posts_lists' %}">Return</a>
+    </div>
+
+
+{% endblock content %}

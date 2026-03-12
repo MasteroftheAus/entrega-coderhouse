@@ -1,0 +1,17 @@
+{% extends 'miiapp/base.html' %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All the users</title>
+</head>
+<body>
+    <h1>User list</h1>
+    <ul>
+        {% for user in users %}
+            <li>{{ user.nombre }} {{ user.apellido }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8"> 
+    </head> 
+    <body> 
+        <style>
+        .navbar{
+            overflow: hidden;
+            background-color: coral;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar a {
+            float: left;
+            font-size: medium;
+            color: whitesmoke;
+            text-align: center;
+            padding: 13px 15px;
+            
+        }
+
+        .dropdown {
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: small;
+            outline: none;
+            border: none;
+            color: whitesmoke;
+            padding: 9px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0px;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: palevioletred;
+
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color:darkolivegreen;
+            min-width: 16px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+        .dropdown-content a {
+            float: none;
+            color: black;
+            padding: 9px;
+            text-decoration: dotted;
+            display: block;
+            text-align: center;
+        }
+
+        .dropdown-content a:hover {
+            background-color: darkseagreen; 
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        </style>
+        <div class="navbar">
+            <a href="{% url 'miiapp:home' %}">Home</a>
+            <a href="{% url 'miiapp:index' %}">Index</a>
+            <div class="dropdown">
+                <button class="dropbtn" >Where to go?</button>
+                <div class="dropdown-content" id="My dropdownn">
+                <a href="{% url 'miiapp:index' %}">Index</a>
+                <a href="{% url 'miiapp:post_lists' %}">Types</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn" >Post related
+                </button>
+                <div class="dropdown-content" id="My drowdown2">
+                <a href="{% url 'miiapp:post_lists' %}">Types</a>
+                <a href="{% url 'miiapp:post_form' %}">Make a post</a>
+                </div>
+            </div>
+
+            {% if user.is_authenticated %}
+                <div class="dropdown" style="float:right">
+
+                <button class="dropbtn">
+                Welcome {{ user.username }}
+                </button>
+                <div class="dropdown-content" id="My drowdown3">
+                <a href="{% url 'miiapp:profile' %}">Profile</a>
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'miiapp:login' %}">Login</a>
+                <a href="{% url 'miiapp:sign_up' %}">Sign Up</a>
+            {% endif %}
+        </div>
+    </div >  
+</div >
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Posting list</h1> 
+            {% block content_title}
+                Le titulo
+            {% endblock content_title}
+        </ul>
+    </div>
+        
+        <main> {%block content %} <!-- Contenido específico de cada página irá aquí --> {%endblock %} </main> 
+        <footer> <p>&copy; All rights reserved</p> </footer> 
+    </body> 
+</html>

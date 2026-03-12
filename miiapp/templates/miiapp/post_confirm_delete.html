@@ -1,0 +1,19 @@
+{% extends 'miiapp/base.html' %}
+{% block title %}
+    Delete
+{% endblock title %}
+
+{% block content_title %}
+   <p> Are you sure you want to delete the post? {{object}}</p>
+{% endblock content_title %}
+
+{% block content %}
+    <form method="post">
+    {% csrf_token %}
+    </form>
+        <button type="submit">Yup</button>
+
+    <div>
+        <a href="{% url 'miiapp:post_lists' %}" >Return</a>
+    </div>
+{% endblock content %}

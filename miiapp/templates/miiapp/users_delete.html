@@ -1,0 +1,16 @@
+{% extends 'miiapp/base.html' %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm deletion</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete this account?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, delete it</button>
+    </form>
+</body>
+</html>

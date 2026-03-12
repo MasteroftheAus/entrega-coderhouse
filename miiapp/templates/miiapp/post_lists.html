@@ -1,0 +1,52 @@
+{% extends 'miiapp/base.html' %}
+{% block title %}
+    Posts
+{% endblock title %}
+
+{% block content_title %}
+    Post Lists
+{% endblock content_title %}
+
+{% block main %}
+    <button><a href="{% url 'miiapp:cathegory_create' %}" class="btn btn-primary mb-4">Make a Category</a></button>
+    <form action="% url 'miiapp:post_lists' %" method="get">
+        <input type="text" name="search" placeholder="Searching..."
+    class="form-control mb-4">   
+    <button type="submit"> Search</button>
+
+        
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Title </th>
+                    <th>Author</th>
+                    <th>Fecha de publicación</th>
+                    <th>State</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for post in posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.author }}</td>
+                        <td>{{ post.fecha_publicacion }}</td>|
+                        {% if post.state == "D" %}
+                            <td>Draft</td>
+                        {% else %}
+                            <td><strong>Posted</strong></td>
+
+                        {% endif %}
+                    </tr>
+
+                    <td>{{title.name}} 
+                        <a href="{% url 'miiapp:post_detail' post.id %} " class="btn btn-sm btn-info"> Readmore</a>
+                        <a href="{% url post_update.html post.id %}" class="btn btn-sm btn-warning">Update</a>
+                        <a href="{% url post_confirm_delete.html post.id %} " class="btn btn-sm btn-danger"> Delete</a>
+                        <a href="{% url cathegory_create.html post.id %} " class="btn btn-sm btn-danger"> Make a new Category</a>
+                    <td>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock main %}

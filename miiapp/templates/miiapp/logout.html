@@ -1,0 +1,13 @@
+{% extends "miiapp/base.html" %}
+
+{% block content %}
+
+<h2>You have logged out</h2>
+
+<p>Thanks for visiting!</p>
+
+<a href="{% url 'miiapp:login' %}">Login again</a>
+
+<a href="{% url 'miiapp:home' %}">Go to Home</a>
+
+{% endblock %}

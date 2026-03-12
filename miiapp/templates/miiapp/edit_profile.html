@@ -1,0 +1,15 @@
+{% extends 'miiapp/base.html' %}
+
+{% block content title %}
+  <h2>Edit profile</h2>
+  {% endblock content title %}
+
+  <form method="post">
+    {% csrf_token %}
+    <table>
+
+        {{form.as_table}}
+    </table>
+    <button type="submit">Save changes</button>
+  </form>
+{% endblock %}

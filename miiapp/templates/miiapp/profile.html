@@ -1,0 +1,17 @@
+{% extends 'miiapp/base.html' %}
+
+{% block title %}
+    Profile
+{% endblock title %}
+
+{% block content_title %}
+    Your profile
+{% endblock content_title %}
+
+{% block content %}
+    <p>Username: {{user.username}}</p>
+    <p>Name: {{user.Name}}</p>
+    <p>Surname: {{user.Surname}}</p>
+    <p>Email: {{user.Email}}</p>
+    <a href="{% url 'miiapp:edit_profile' %}">Edit profile</a>
+{% endblock content %}
