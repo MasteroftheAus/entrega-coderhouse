@@ -72,6 +72,10 @@
         Edit profile
     </a>
 
+    
+    <a href="{% url 'messaging:send_user_message' user.id %}" class="edit-btn">
+        Send message</a>
+
 </div>
 
 {% endblock content %}

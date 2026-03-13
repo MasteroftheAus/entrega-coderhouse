@@ -166,6 +166,16 @@ class SignUpView(SuccessMessageMixin, CreateView):
     success_message = "Your profile was created without a hitch!"
 
 
+@login_required
+def inbox(request):
+
+    messages = Message.objects.filter(receiver=request.user)
+
+    return render(request, 'messaging/inbox.html', {'messages': messages})
+
+
+
+
 #def confirm_delete(request, pk: int):
 #    post = post.objects.get(id=pk)
 #    context = {"id": id}

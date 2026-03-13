@@ -1,0 +1,79 @@
+{% extends 'miiapp/base.html' %}
+
+{% block content %}
+
+<style>
+
+.card{
+    max-width:600px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.form-field{
+    margin-bottom:15px;
+}
+
+.form-field label{
+    display:block;
+    margin-bottom:5px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select{
+    width:100%;
+    padding:8px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:10px 16px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:salmon;
+}
+
+</style>
+
+<div class="card">
+
+<h2>Send Message</h2>
+
+<form method="post">
+
+{% csrf_token %}
+
+<div class="form-field">
+{{ form.receiver.label_tag }}
+{{ form.receiver }}
+</div>
+
+<div class="form-field">
+{{ form.subject.label_tag }}
+{{ form.subject }}
+</div>
+
+<div class="form-field">
+{{ form.content.label_tag }}
+{{ form.content }}
+</div>
+
+<button type="submit">Send</button>
+
+</form>
+
+</div>
+
+{% endblock %}

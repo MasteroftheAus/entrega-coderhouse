@@ -28,6 +28,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("index/", views.index, name= "index"),
     path("", include("miiapp.urls")),
+    path("messages", include("messaging.urls")),
 
 
 ]

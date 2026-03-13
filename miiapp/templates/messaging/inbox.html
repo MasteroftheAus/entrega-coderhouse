@@ -1,0 +1,77 @@
+{% extends 'miiapp/base.html' %}
+
+{% block content %}
+
+<style>
+
+.card{
+    max-width:800px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.message{
+    padding:12px;
+    border-bottom:1px solid #ddd;
+}
+
+.message:last-child{
+    border-bottom:none;
+}
+
+.message strong{
+    color:#333;
+}
+
+.action-btn{
+    padding:8px 14px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.action-btn:hover{
+    background:salmon;
+}
+
+</style>
+
+<div class="card">
+
+<h2>Inbox</h2>
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="message">
+            <strong>{{ message.sender }}</strong><br>
+            <strong>Subject:</strong> {{ message.subject }}<br>
+            {{ message.content }}<br>
+            <small>{{ message.date }}</small>
+        </div>
+
+    {% endfor %}
+
+{% else %}
+
+<p>No messages yet.</p>
+
+{% endif %}
+
+<br>
+
+<a href="{% url 'send_message' %}" class="action-btn">
+Send Message
+</a>
+
+</div>
+
+{% endblock %}
