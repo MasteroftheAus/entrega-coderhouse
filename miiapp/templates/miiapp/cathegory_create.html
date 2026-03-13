@@ -1,17 +1,77 @@
 {% extends 'miiapp/base.html' %}
 
-{% block title %}
-    Make a type
-{% endblock title %}
+{% block content %}
+
+<style>
+
+.form-card{
+    max-width:600px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.form-title{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.form-fields table{
+    width:100%;
+}
+
+.form-fields input,
+.form-fields select,
+.form-fields textarea{
+    width:100%;
+    padding:8px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.form-buttons{
+    margin-top:20px;
+}
+
+.save-btn{
+    padding:8px 16px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    background:salmon;
+}
+
+</style>
+
+
+<div class="form-card">
+
+    <div class="form-title">
+        Make a Type
+    </div>
+
     <form method="post">
+
         {% csrf_token %}
-        <table>
-        {{form.as_table}}
-        </table>        
-        <button type="submit">Save</button>
+
+        <div class="form-fields">
+            {{ form.as_table }}
+        </div>
+
+        <div class="form-buttons">
+            <button class="save-btn" type="submit">Save</button>
+        </div>
 
     </form>
-{% block main %}
-    
+
+</div>
 
 {% endblock content %}

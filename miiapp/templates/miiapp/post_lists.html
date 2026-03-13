@@ -1,52 +1,166 @@
 {% extends 'miiapp/base.html' %}
-{% block title %}
-    Posts
-{% endblock title %}
 
-{% block content_title %}
-    Post Lists
-{% endblock content_title %}
+{% block content %}
 
-{% block main %}
-    <button><a href="{% url 'miiapp:cathegory_create' %}" class="btn btn-primary mb-4">Make a Category</a></button>
-    <form action="% url 'miiapp:post_lists' %" method="get">
-        <input type="text" name="search" placeholder="Searching..."
-    class="form-control mb-4">   
-    <button type="submit"> Search</button>
+<style>
 
-        
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Title </th>
-                    <th>Author</th>
-                    <th>Fecha de publicación</th>
-                    <th>State</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for post in posts %}
-                    <tr>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.author }}</td>
-                        <td>{{ post.fecha_publicacion }}</td>|
-                        {% if post.state == "D" %}
-                            <td>Draft</td>
-                        {% else %}
-                            <td><strong>Posted</strong></td>
+.list-card{
+    max-width:900px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-                        {% endif %}
-                    </tr>
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
 
-                    <td>{{title.name}} 
-                        <a href="{% url 'miiapp:post_detail' post.id %} " class="btn btn-sm btn-info"> Readmore</a>
-                        <a href="{% url post_update.html post.id %}" class="btn btn-sm btn-warning">Update</a>
-                        <a href="{% url post_confirm_delete.html post.id %} " class="btn btn-sm btn-danger"> Delete</a>
-                        <a href="{% url cathegory_create.html post.id %} " class="btn btn-sm btn-danger"> Make a new Category</a>
-                    <td>
-                {% endfor %}
-            </tbody>
-        </table>
+.search-box{
+    margin-bottom:20px;
+}
+
+.search-box input{
+    padding:8px;
+    width:70%;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.search-box button{
+    padding:8px 14px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.search-box button:hover{
+    background:salmon;
+}
+
+.post-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.post-table th,
+.post-table td{
+    padding:10px;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+.post-table th{
+    background:#f5f5f5;
+}
+
+.action-btn{
+    margin-right:5px;
+    padding:4px 8px;
+    border-radius:4px;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.read-btn{background:#5686ff;color:white;}
+.update-btn{background:#3ca792;color:black;}
+.delete-btn{background:#bbef61;color:white;}
+
+.no-posts{
+    text-align:center;
+    padding:25px;
+    color:#777;
+    font-style:italic;
+}
+
+</style>
+
+
+<div class="list-card">
+
+    <div class="card-header">
+        <h2>Posts</h2>
+
+        <a href="{% url 'miiapp:type_create' %}" class="action-btn read-btn">
+            + Category
+        </a>
     </div>
-{% endblock main %}
+
+
+    <form action="{% url 'miiapp:post_lists' %}" method="get" class="search-box">
+        <input type="text" name="search" placeholder="Searching...">
+        <button type="submit">Search</button>
+    </form>
+
+
+    <table class="post-table">
+
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Date</th>
+                <th>State</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for post in posts %}
+
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.author }}</td>
+            <td>{{ post.fecha_publicacion }}</td>
+
+            <td>
+                {% if post.state == "D" %}
+                    Draft
+                {% else %}
+                    <strong>Posted</strong>
+                {% endif %}
+            </td>
+
+            <td>
+
+                <a href="{% url 'miiapp:post_details' post.id %}" class="action-btn read-btn">
+                    Read
+                </a>
+
+                <a href="{% url 'miiapp:post_update' post.id %}" class="action-btn update-btn">
+                    Update
+                </a>
+
+                <a href="{% url 'miiapp:post_confirm_delete' post.id %}" class="action-btn delete-btn">
+                    Delete
+                </a>
+
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="5" class="no-posts">
+                No posts found.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock content %}

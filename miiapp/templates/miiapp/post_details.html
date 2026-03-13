@@ -1,21 +1,92 @@
 {% extends 'miiapp/base.html' %}
 
-{% block title %}
-    Post details
-{% endblock title %}
-
 {% block content %}
-    <ul>
-        <li>title: {{object.title}}</li>
-        <li>author: {{object.author}}</li>
-        <li>content: {{object.content}}</li>
-        <li>date of publishing: {{object.fecha_publicacion}}</li>
-        <li>type: {{object.type}}</li>
-        <li>state: {{object.state}}</li>
-    </ul>
-    <div>
-        <a href="{% url 'posts_lists' %}">Return</a>
+
+<style>
+
+.post-card{
+    max-width:700px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.post-title{
+    font-size:28px;
+    margin-bottom:10px;
+}
+
+.post-meta{
+    color:gray;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.post-grid{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:10px 20px;
+}
+
+.label{
+    font-weight:bold;
+}
+
+.content-box{
+    margin-top:20px;
+    padding:15px;
+    background:#f5f5f5;
+    border-radius:6px;
+}
+
+.return-btn{
+    display:inline-block;
+    margin-top:25px;
+    padding:8px 14px;
+    background:coral;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.return-btn:hover{
+    background:salmon;
+}
+
+</style>
+
+
+<div class="post-card">
+
+    <div class="post-title">{{ object.title }}</div>
+
+    <div class="post-meta">
+        Author: {{ object.author }} |
+        Published: {{ object.fecha_publicacion }}
     </div>
 
+    <div class="post-grid">
+
+        <div class="label">Type:</div>
+        <div>{{ object.type }}</div>
+
+        <div class="label">State:</div>
+        <div>{{ object.state }}</div>
+
+    </div>
+
+    <div class="content-box">
+        <strong>Content:</strong><br>
+        {{ object.content }}
+    </div>
+
+    <a class="return-btn" href="{% url 'miiapp:post_lists' %}">
+        ← Back to posts
+    </a>
+
+</div>
 
 {% endblock content %}

@@ -1,15 +1,88 @@
 {% extends 'miiapp/base.html' %}
 
-{% block content title %}
-  <h2>Edit profile</h2>
-  {% endblock content title %}
+{% block content %}
 
-  <form method="post">
+<style>
+
+.edit-card{
+    max-width:500px;
+    margin:40px auto;
+    padding:30px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.edit-card h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.avatar-preview{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.avatar-preview img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.form-table{
+    width:100%;
+}
+
+.save-btn{
+    margin-top:15px;
+    padding:8px 16px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    background:salmon;
+}
+
+</style>
+
+
+<div class="edit-card">
+
+<h2>Edit profile</h2>
+
+<div class="avatar-preview">
+
+{% if user.avatar.image %}
+    <img src="{{ user.avatar.image.url }}">
+{% else %}
+    <p>No avatar uploaded</p>
+{% endif %}
+
+</div>
+
+<form method="post" enctype="multipart/form-data">
+
     {% csrf_token %}
-    <table>
 
-        {{form.as_table}}
+    <table class="form-table">
+        {{ form.as_table }}
+        {{ avatar_form.as_table }}
     </table>
-    <button type="submit">Save changes</button>
-  </form>
+
+    <div style="text-align:center">
+        <button type="submit" class="save-btn">
+            Save changes
+        </button>
+    </div>
+
+</form>
+
+</div>
+
 {% endblock %}

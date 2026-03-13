@@ -17,8 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from miiapp import views
-from miiapp.views import SignUpView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 app_name = "miiapp"
 
 
@@ -28,9 +28,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("index/", views.index, name= "index"),
     path("", include("miiapp.urls")),
-    path("login/", LoginView.as_view(), name="login"),
-    path('logout/', LogoutView.as_view(), name='logout'),
-    path("signup/", SignUpView.as_view(), name="sign_up"),
 
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

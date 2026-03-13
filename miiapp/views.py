@@ -6,8 +6,8 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from . import forms
-from .models import user, post
-from .forms import PostForm, userForm
+from .models import user, post, Avatar
+from .forms import PostForm, userForm, AvatarForm
 from django.contrib.auth.forms import UserChangeForm
 from django.contrib.auth.decorators import login_required
 
@@ -51,6 +51,10 @@ class UserDeleteView(DeleteView):
     template_name = 'miiapp/user_confirm_delete.html'
     success_url = '/users/'
 
+
+def about(request):
+    return render(request, "miiapp/about.html")
+
 def create_user(request):
     if request.method == 'POST':
         form = userForm(request.POST)
@@ -74,18 +78,51 @@ def CathegoryCreate(request):
 
 @login_required
 def profile(request):
-    return render(request, 'miiapp/editProfile.html',)
+    return render(request, 'miiapp/profile.html')
 
 @login_required
 def editProfile(request):
     if request.method == 'POST':
         form = UserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
+        try:
+            avatar = request.user.avatar
+        except Avatar.DoesNotExist:
+            avatar=None
+
+        if avatar:
+            avatar_form = AvatarForm(request.POST, request.FILES, instance=avatar)
+        else:
+            avatar_form = AvatarForm(request.POST, request.FILES)
+
+        if form.is_valid() and avatar_form.is_valid():
             form.save()
-            return redirect('miiapp/profile.html')
+            avatar_instance = avatar_form.save(commit=False)
+            avatar_instance.user = request.user
+            avatar_instance.save()
+            return redirect('miiapp:profile')
     else:
         form = UserChangeForm(instance=request.user)
-    return render(request, 'miiapp/editProfile.html', {'form': form})
+        if hasattr(request.user, "avatar"):
+            avatar_form = AvatarForm(instance=request.user.avatar)
+        else:
+            avatar_form = AvatarForm()
+    return render(request,'miiapp/edit_profile.html',{'form': form, 'avatar_form': avatar_form}
+)
+
+
+
+
+
+@login_required
+def upload_avatar(request):
+    if request.method == 'POST':
+        form = AvatarForm(request.POST, request.FILES, instance=request.user.avatar)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = AvatarForm(instance=request.user.avatar)
+    return render(request, 'upload_avatar.html', {'form': form})
 
 class PostListView(ListView):
     model = post
@@ -102,7 +139,7 @@ class PostListView(ListView):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = post
     form_class = PostForm
-    success_url = reverse_lazy("miiapp/post_lists.html")
+    success_url = reverse_lazy("miiapp:post_lists")
 
     def form_valid(self, form):
         if self.request.user.is_authenticated:
@@ -115,6 +152,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostDetailView(DetailView):
     model = post
+    template_name = "miiapp/post_details.html"
 
 class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = post

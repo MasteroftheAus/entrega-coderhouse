@@ -1,5 +1,5 @@
 from django import forms
-from .models import post, cathegory
+from .models import post, cathegory, Avatar
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import UserChangeForm
@@ -33,3 +33,8 @@ class EditProfileForm(UserChangeForm):
     class Meta:
         model = User
         fields = ("username", "email", "first_name", "last_name")
+
+class AvatarForm(forms.ModelForm):
+    class Meta:
+        model = Avatar
+        fields = ["image"]

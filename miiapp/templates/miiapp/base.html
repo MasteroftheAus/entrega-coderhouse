@@ -71,8 +71,9 @@
         <div class="navbar">
             <a href="{% url 'miiapp:home' %}">Home</a>
             <a href="{% url 'miiapp:index' %}">Index</a>
+            <a href="{% url 'miiapp:about' %}">About</a>
             <div class="dropdown">
-                <button class="dropbtn" >Where to go?</button>
+                <button class="dropbtn">Where to go?</button>
                 <div class="dropdown-content" id="My dropdownn">
                 <a href="{% url 'miiapp:index' %}">Index</a>
                 <a href="{% url 'miiapp:post_lists' %}">Types</a>
@@ -80,7 +81,7 @@
             </div>
 
             <div class="dropdown">
-                <button class="dropbtn" >Post related
+                <button class="dropbtn">Post related
                 </button>
                 <div class="dropdown-content" id="My drowdown2">
                 <a href="{% url 'miiapp:post_lists' %}">Types</a>
@@ -95,24 +96,30 @@
                 Welcome {{ user.username }}
                 </button>
                 <div class="dropdown-content" id="My drowdown3">
-                <a href="{% url 'miiapp:profile' %}">Profile</a>
-                <a href="{% url 'logout' %}">Logout</a>
+                    <a href="{% url 'miiapp:profile' %}">Profile</a>
+                    <a href="{% url 'miiapp:logout' %}">Logout</a>
+                </div>
             {% else %}
                 <a href="{% url 'miiapp:login' %}">Login</a>
                 <a href="{% url 'miiapp:sign_up' %}">Sign Up</a>
             {% endif %}
+            </div>
         </div>
-    </div >  
-</div >
+    </div>  
+</div>
     <div class="container mt-5">
-        <h1 class="text-center mb-4">Posting list</h1> 
-            {% block content_title}
-                Le titulo
-            {% endblock content_title}
-        </ul>
+        <h1 class="text-center mb-4">Hello!</h1> 
     </div>
         
-        <main> {%block content %} <!-- Contenido específico de cada página irá aquí --> {%endblock %} </main> 
-        <footer> <p>&copy; All rights reserved</p> </footer> 
+<main>
+
+{% block content %}
+{% endblock %}
+
+</main>
+
+<footer>
+<p>&copy; All rights reserved</p>
+</footer>
     </body> 
 </html>

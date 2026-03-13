@@ -1,24 +1,96 @@
 {% extends 'miiapp/base.html' %}
-{% block title %}
-    Make a post
-{% endblock title %}
-
-{% block content_title%}
-    {% if form.instance.pk %}
-        Edit Post
-    {% else %}
-    Posting
-    {% endif %}
-{% endblock content_title %}
-
 
 {% block content %}
+
+<style>
+
+.form-card{
+    max-width:650px;
+    margin:40px auto;
+    padding:25px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.form-title{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.form-fields p{
+    margin-bottom:15px;
+}
+
+.form-fields input,
+.form-fields textarea,
+.form-fields select{
+    width:100%;
+    padding:8px;
+    border-radius:5px;
+    border:1px solid #ccc;
+}
+
+.form-buttons{
+    margin-top:20px;
+}
+
+.submit-btn{
+    padding:8px 16px;
+    background:coral;
+    border:none;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:salmon;
+}
+
+.cancel-btn{
+    margin-left:10px;
+    text-decoration:none;
+    padding:8px 14px;
+    background:#ddd;
+    border-radius:5px;
+    color:black;
+}
+
+.cancel-btn:hover{
+    background:#ccc;
+}
+
+</style>
+
+
+<div class="form-card">
+
+    <div class="form-title">
+
+        {% if form.instance.pk %}
+            Edit Post
+        {% else %}
+            Make a Post
+        {% endif %}
+
+    </div>
+
     <form method="post">
         {% csrf_token %}
-        <table>
-            {{form.as_p}}
-        </table>
-        <input type="submit" value="Send">
-        <a href="{% url 'miiapp:post_lists' %}" >Cancel</a>
+
+        <div class="form-fields">
+            {{ form.as_p }}
+        </div>
+
+        <div class="form-buttons">
+            <button class="submit-btn" type="submit">Send</button>
+            <a class="cancel-btn" href="{% url 'miiapp:post_lists' %}">Cancel</a>
+        </div>
+
     </form>
+
+</div>
+
 {% endblock content %}

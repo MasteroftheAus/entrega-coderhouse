@@ -1,1 +1,103 @@
 {% extends 'miiapp/base.html' %}
+
+{% block content %}
+
+<style>
+
+.about-card{
+    max-width:750px;
+    margin:40px auto;
+    padding:30px;
+    border-radius:10px;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    font-family:Arial, Helvetica, sans-serif;
+    line-height:1.6;
+    text-align:center;
+}
+
+.author-photo img{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:15px;
+}
+
+.author-name{
+    font-size:22px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.author-role{
+    color:gray;
+    margin-bottom:20px;
+}
+
+.about-text{
+    text-align:left;
+    color:#444;
+    margin-top:20px;
+}
+
+.github-link{
+    display:inline-block;
+    margin-top:20px;
+    padding:8px 16px;
+    background:coral;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+}
+
+.github-link:hover{
+    background:salmon;
+}
+
+</style>
+
+
+<div class="about-card">
+
+<div class="author-photo">
+
+<img src="https://i.imgur.com/iTPLxNl.jpeg">
+
+</div>
+
+<div class="author-name">
+Valentina
+</div>
+
+<div class="author-role">
+Student
+</div>
+
+
+<div class="about-text">
+
+<p>
+The author of this website is very exhausted but happy to have completed
+this project. The goal of this database is to document strange creatures
+of the deep ocean.
+</p>
+
+<p>
+They are 27 years old and excited to have learned new programming
+skills, especially working with Django, databases and web development.
+</p>
+
+<p>
+This project was very tiring but they are proud of what they have accomplished.
+</p>
+
+</div>
+
+<a href="https://github.com/MasteroftheAus" class="github-link">
+View the GitHub
+</a>
+
+</div>
+
+{% endblock %}
